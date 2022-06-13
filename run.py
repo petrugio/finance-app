@@ -49,5 +49,40 @@ def main():
     main_menu()
 
 
+def us_etf():
+    """
+    Displays the U.S. Sector ETF's on the terminal
+    """
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("-U.S. Sector ETF's-")
+
+    etf = yf.download(
+        'XLB XLC XLY XLP XLE XLF XLV XLI XLK XLU XLRE',
+        period='1wk',
+        progress=False,
+        interval="1d",
+        rounding=2
+    )
+
+    print(etf['Adj Close'].to_markdown(tablefmt="grid"))
+    print("---------------")
+    print("0. MAIN MENU")
+    print("---------------")
+
+    while True:
+        try:
+            choice = int(input("Enter Choice: \n"))
+        except ValueError:
+            print("You didn't enter a number !")
+            continue
+
+        if choice == 0:
+            main_menu()
+            break
+        else:
+            print("Invalid choice !!!")
+
+            
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
