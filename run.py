@@ -231,6 +231,23 @@ series_one_month = filtered_df_month\
     .pct_change(periods=lookback_days_one_month)\
     .apply(normalize_percent).tail(1).iloc[0]
 
+start_of_year = datetime.datetime(date.today().year, 1, 1).date()
+index_series_ytd = df.index.to_series()
+interval_filter = index_series_ytd.between(str(start_of_year), str(today))
+filtered_df = df[interval_filter]
+lookback_days = len(filtered_df.index.to_series()) - 1
+series_ytd = filtered_df.pct_change(periods=lookback_days)\
+    .apply(normalize_percent).tail(1).iloc[0]
+
+one_year_back = datetime.datetime(today.year - 1, today.month, today.day).date()
+index_series_year = df.index.to_series()
+nterval_filter_year = index_series_year\
+    .between(str(one_year_back), str(today))
+filtered_df_year = df[interval_filter_year]
+lookback_days_one_year = len(filtered_df_year.index.to_series()) - 1
+series_one_year = filtered_df_year.pct_change(periods=lookback_days_one_year)\
+    .apply(normalize_percent).tail(1).iloc[0]
+
 
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
