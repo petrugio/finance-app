@@ -248,6 +248,17 @@ lookback_days_one_year = len(filtered_df_year.index.to_series()) - 1
 series_one_year = filtered_df_year.pct_change(periods=lookback_days_one_year)\
     .apply(normalize_percent).tail(1).iloc[0]
 
+three_year_back = datetime.datetime(today.year - 3, today.month, today.day)\
+    .date()
+index_series_three_year = df.index.to_series()
+interval_filter_three_year = index_series_three_year\
+    .between(str(three_year_back), str(today))
+filtered_df_three_year = df[interval_filter_three_year]
+lookback_days_three_year = len(filtered_df_three_year.index.to_series()) - 1
+series_three_year = filtered_df_three_year\
+    .pct_change(periods=lookback_days_three_year)\
+    .apply(normalize_percent).tail(1).iloc[0]
+
 
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
