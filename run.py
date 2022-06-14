@@ -131,6 +131,30 @@ def global_etf():
         else:
             print("Invalid choice !!!")
 
+cm.init()
+
+column_names = [
+    "ETF",
+    "Today",
+    "1 Month",
+    "YTD",
+    "1 Year",
+    "3 Years"
+]
+
+us_etf_tickers = ['XLB', 'XLC', 'XLY',
+                  'XLP', 'XLE', 'XLF',
+                  'XLV', 'XLI', 'XLK',
+                  'XLU', 'XLRE']
+
+us_small_etf_tickers = ['PSCD', 'PSCC', 'PSCH',
+                        'PSCF', 'PSCE', 'PSCI',
+                        'PSCM', 'PSCU', 'PSCT']
+
+global_etf_tickers = ['MXI', 'JXI', 'RXI',
+                      'KXI', 'IXC', 'IXG',
+                      'IXJ', 'EXI', 'IXN', 'IXP']
+
 
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
