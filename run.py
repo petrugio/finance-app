@@ -202,6 +202,17 @@ def format_percent(raw_input: np.float64):
         return colored(f"{raw_input} %", 'green')
     else:
         return colored(f"{raw_input} %", 'red')
+
+
+def get_quotes(tickers):
+    return yf.download(
+        tickers,
+        period='3y',
+        progress=False,
+        interval="1d",
+        rounding=2
+    )['Adj Close']
+
     
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
