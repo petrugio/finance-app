@@ -108,5 +108,29 @@ def us_small_etf():
             print("Invalid choice !!!")
 
 
+def global_etf():
+    """
+    Displays the Global Sector ETF's on the terminal
+    """
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("-Global Sector ETF's-")
+    print("---------------")
+    print("0. MAIN MENU")
+    print("---------------")
+    while True:
+        try:
+            choice = int(input("Enter Choice: \n"))
+        except ValueError:
+            print("You didn't enter a number !")
+            continue
+
+        if choice == 0:
+            main_menu()
+            break
+        else:
+            print("Invalid choice !!!")
+
+
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
