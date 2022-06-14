@@ -265,5 +265,20 @@ series_ytd_formatted = series_ytd.apply(format_percent).astype(str)
 series_one_year_formatted = series_one_year.apply(format_percent).astype(str)
 series_three_year_formatted = series_three_year.apply(format_percent).astype(str)
 
+today_final_df = series_one_day_formatted.to_frame(name='Today')
+monthly_final_df = series_one_month_formatted.to_frame(name='1 Month')
+ytd_final_df = series_ytd_formatted.to_frame(name='YTD')
+one_year_final_df = series_one_year_formatted.to_frame(name='1 Year')
+three_year_final_df = series_three_year_formatted.to_frame(name='3 Years')
+
+final_df = pd.concat([today_final_df,
+                      monthly_final_df,
+                      ytd_final_df,
+                      one_year_final_df,
+                      three_year_final_df],
+                     axis=1)
+print(tabulate(final_df, headers='keys', tablefmt='psql'))
+
+
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
