@@ -132,6 +132,7 @@ def global_etf():
             print("Invalid choice !!!")
 
 cm.init()
+today = date.today()
 
 column_names = [
     "ETF",
@@ -213,6 +214,23 @@ def get_quotes(tickers):
         rounding=2
     )['Adj Close']
 
-    
+df = pd.DataFrame(get_quotes(us_etf_tickers))
+
+series_daily = df\
+    .pct_change(periods=1) \
+    .apply(normalize_percent) \
+    .tail(1).iloc[0]
+one_month_back = datetime\
+    .datetime(today.year, today.month - 1, today.day).date()
+index_series_month = df.index.to_series()
+interval_filter_month = index_series_month\
+    .between(str(one_month_back), str(today))
+filtered_df_month = df[interval_filter_month]
+lookback_days_one_month = len(filtered_df_month.index.to_series()) - 1
+series_one_month = filtered_df_month\
+    .pct_change(periods=lookback_days_one_month)\
+    .apply(normalize_percent).tail(1).iloc[0]
+
+
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
