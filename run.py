@@ -155,6 +155,44 @@ global_etf_tickers = ['MXI', 'JXI', 'RXI',
                       'KXI', 'IXC', 'IXG',
                       'IXJ', 'EXI', 'IXN', 'IXP']
 
+us_etf_tickers_names = [
+    'Basic Materials',
+    'Communication Services',
+    'Consumer Discretionary',
+    'Consumer Staples',
+    'Energy',
+    'Financial Services',
+    'Healthcare',
+    'Industrial',
+    'Technology',
+    'Utilities',
+    'Real Estate',
+]
+
+us_small_etf_tickers_names = [
+    'Consumer Discretionary',
+    'Consumer Staples',
+    'Healthcare',
+    'Financials',
+    'Energy',
+    'Industrials',
+    'Basic Materials',
+    'Utilities',
+    'Technology'
+]
+
+global_etf_tickers_names = [
+    'Basic Materials',
+    'Utilities',
+    'Consumer Discretionary',
+    'Consumer Staples',
+    'Energy',
+    'Financial Services',
+    'Healthcare',
+    'Industrial',
+    'Technology',
+    'Telecommunications'
+]
 
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
