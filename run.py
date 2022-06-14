@@ -259,6 +259,11 @@ series_three_year = filtered_df_three_year\
     .pct_change(periods=lookback_days_three_year)\
     .apply(normalize_percent).tail(1).iloc[0]
 
+series_one_day_formatted = series_daily.apply(format_percent).astype(str)
+series_one_month_formatted = series_one_month.apply(format_percent).astype(str)
+series_ytd_formatted = series_ytd.apply(format_percent).astype(str)
+series_one_year_formatted = series_one_year.apply(format_percent).astype(str)
+series_three_year_formatted = series_three_year.apply(format_percent).astype(str)
 
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
