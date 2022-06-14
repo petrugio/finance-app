@@ -57,15 +57,10 @@ def us_etf():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("-U.S. Sector ETF's-")
 
-    etf = yf.download(
-        'XLB XLC XLY XLP XLE XLF XLV XLI XLK XLU XLRE',
-        period='1wk',
-        progress=False,
-        interval="1d",
-        rounding=2
-    )
+    etf_data = fetch_data_for_tickers(us_etf_tickers)
+    major_etfs = sort_order_df(etf_data, us_etf_tickers_names)
+    print(tabulate(major_etfs, headers='keys', tablefmt='psql'))
 
-    print(etf['Adj Close'].to_markdown(tablefmt="grid"))
     print("---------------")
     print("0. MAIN MENU")
     print("---------------")
@@ -132,7 +127,6 @@ def global_etf():
             print("Invalid choice !!!")
 
 cm.init()
-today = date.today()
 
 column_names = [
     "ETF",
@@ -220,64 +214,73 @@ series_daily = df\
     .pct_change(periods=1) \
     .apply(normalize_percent) \
     .tail(1).iloc[0]
-one_month_back = datetime\
-    .datetime(today.year, today.month - 1, today.day).date()
-index_series_month = df.index.to_series()
-interval_filter_month = index_series_month\
-    .between(str(one_month_back), str(today))
-filtered_df_month = df[interval_filter_month]
-lookback_days_one_month = len(filtered_df_month.index.to_series()) - 1
-series_one_month = filtered_df_month\
-    .pct_change(periods=lookback_days_one_month)\
-    .apply(normalize_percent).tail(1).iloc[0]
 
-start_of_year = datetime.datetime(date.today().year, 1, 1).date()
-index_series_ytd = df.index.to_series()
-interval_filter = index_series_ytd.between(str(start_of_year), str(today))
-filtered_df = df[interval_filter]
-lookback_days = len(filtered_df.index.to_series()) - 1
-series_ytd = filtered_df.pct_change(periods=lookback_days)\
-    .apply(normalize_percent).tail(1).iloc[0]
 
-one_year_back = datetime.datetime(today.year - 1, today.month, today.day).date()
-index_series_year = df.index.to_series()
-nterval_filter_year = index_series_year\
-    .between(str(one_year_back), str(today))
-filtered_df_year = df[interval_filter_year]
-lookback_days_one_year = len(filtered_df_year.index.to_series()) - 1
-series_one_year = filtered_df_year.pct_change(periods=lookback_days_one_year)\
-    .apply(normalize_percent).tail(1).iloc[0]
+def calculate_data_for_period(df: pd.DataFrame,
+                              period_start_date: date,
+                              period_end_date: date,
+                              frame_label: str) -> pd.DataFrame:
+    try:
+        index_series = df.index.to_series()
+        interval_filter = index_series \
+            .between(str(period_start_date), str(period_end_date))
+        filtered_df = df[interval_filter]
+        lookback_days = len(filtered_df.index.to_series()) - 1
+        return filtered_df \
+            .pct_change(periods=lookback_days) \
+            .apply(normalize_percent).tail(1).iloc[0] \
+            .apply(format_percent).astype(str) \
+            .to_frame(name=frame_label)
+    except Exception:
+        print("Something bad happened while processing data!")
 
-three_year_back = datetime.datetime(today.year - 3, today.month, today.day)\
-    .date()
-index_series_three_year = df.index.to_series()
-interval_filter_three_year = index_series_three_year\
-    .between(str(three_year_back), str(today))
-filtered_df_three_year = df[interval_filter_three_year]
-lookback_days_three_year = len(filtered_df_three_year.index.to_series()) - 1
-series_three_year = filtered_df_three_year\
-    .pct_change(periods=lookback_days_three_year)\
-    .apply(normalize_percent).tail(1).iloc[0]
 
-series_one_day_formatted = series_daily.apply(format_percent).astype(str)
-series_one_month_formatted = series_one_month.apply(format_percent).astype(str)
-series_ytd_formatted = series_ytd.apply(format_percent).astype(str)
-series_one_year_formatted = series_one_year.apply(format_percent).astype(str)
-series_three_year_formatted = series_three_year.apply(format_percent).astype(str)
+def fetch_data_for_tickers(tickers):
+    tickers = tickers if isinstance(
+        tickers, (list, set, tuple)) else tickers.replace(',', ' ').split()
 
-today_final_df = series_one_day_formatted.to_frame(name='Today')
-monthly_final_df = series_one_month_formatted.to_frame(name='1 Month')
-ytd_final_df = series_ytd_formatted.to_frame(name='YTD')
-one_year_final_df = series_one_year_formatted.to_frame(name='1 Year')
-three_year_final_df = series_three_year_formatted.to_frame(name='3 Years')
+    today = date.today()
+    df = pd.DataFrame(get_quotes(tickers))
 
-final_df = pd.concat([today_final_df,
-                      monthly_final_df,
-                      ytd_final_df,
-                      one_year_final_df,
-                      three_year_final_df],
-                     axis=1)
-print(tabulate(final_df, headers='keys', tablefmt='psql'))
+    one_day_back = datetime \
+        .datetime(today.year, today.month, today.day - 1).date()
+    frame_one_day = calculate_data_for_period(df, one_day_back, today, "Today")
+
+    one_month_back = datetime \
+        .datetime(today.year, today.month - 1, today.day).date()
+    frame_one_month = calculate_data_for_period(df, one_month_back, today, "1 Month")
+
+    start_of_year = datetime.datetime(date.today().year, 1, 1).date()
+    frame_ytd = calculate_data_for_period(df, start_of_year, today, "YTD")
+
+    one_year_back = datetime.datetime(today.year - 1, today.month, today.day).date()
+    frame_one_year = calculate_data_for_period(df, one_year_back, today, "1 Year")
+
+    three_year_back = datetime.datetime(today.year - 3, today.month, today.day) \
+        .date()
+    frame_three_year = calculate_data_for_period(df, three_year_back, today, "3 Years")
+
+    return pd.concat([frame_one_day,
+                      frame_one_month,
+                      frame_ytd,
+                      frame_one_year,
+                      frame_three_year],
+                     axis=1).transpose()[us_etf_tickers]
+
+
+def sort_order_df(df: pd.DataFrame, indexes: list) -> pd.DataFrame:
+    df.loc["Index"] = indexes
+
+    modified_column_names = column_names
+    modified_column_names.insert(0, "Index")
+
+    df = df.transpose()
+    df['ETF'] = df.index
+    df = df.reset_index(drop=True)
+
+    final_df = df[modified_column_names]
+    final_df.index += 1
+    return final_df
 
 
 print("\n\nWelcome to Sector ETFs Performance App.\n")
