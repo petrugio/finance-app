@@ -83,6 +83,30 @@ def us_etf():
         else:
             print("Invalid choice !!!")
 
-            
+
+def us_small_etf():
+    """
+    Displays the U.S. Sector - Small Cap ETF's on the terminal
+    """
+
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("-U.S. Sector - Small Cap ETF's-")
+    print("---------------")
+    print("0. MAIN MENU")
+    print("---------------")
+    while True:
+        try:
+            choice = int(input("Enter Choice: \n"))
+        except ValueError:
+            print("You didn't enter a number !")
+            continue
+
+        if choice == 0:
+            main_menu()
+            break
+        else:
+            print("Invalid choice !!!")
+
+
 print("\n\nWelcome to Sector ETFs Performance App.\n")
 main()
