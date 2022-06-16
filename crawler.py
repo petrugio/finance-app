@@ -1,49 +1,65 @@
+""" Crawler class imports """
+# import datetime
 import datetime
 from datetime import date
+# import yahoo finance to fetch data
 import yfinance as yf
+# import pandas to process data from yahoo finance
 import pandas as pd
-
+# import functions and constants
 from constants import column_names
 from functions import normalize_percent
 from functions import format_percent
 
 
 class Crawler:
+    """
+    Contains a set of functios to fetch, process, sort and display data
+    """
     def __init__(self, tickers, ticker_names):
+        """
+        Check and formats the data
+        """
         self.tickers = tickers if isinstance(
             tickers, (list, set, tuple)) else tickers.replace(',', ' ').split()
-        self.tickerNames = ticker_names
+        self.ticker_names = ticker_names
 
     def fetch_data(self) -> pd.DataFrame:
+        """
+        Fetch abd sort data
+        """
         etf_data = self.__fetch_data_for_tickers()
         return self.__sort_order_df(etf_data)
 
     def __fetch_data_for_tickers(self):
+        """Fetch and calculate date for tickers"""
         today = date.today()
         df = pd.DataFrame(self.__get_quotes())
 
         one_day_back = datetime \
             .datetime(today.year, today.month, today.day - 1).date()
-        frame_one_day = self.__calculate_data_for_period(df, one_day_back, today, "Today")
-        # print(frame_one_day)
+        frame_one_day = self.\
+            __calculate_data_for_period(df, one_day_back, today, "Today")
 
         one_month_back = datetime \
             .datetime(today.year, today.month - 1, today.day).date()
-        frame_one_month = self.__calculate_data_for_period(df, one_month_back, today, "1 Month")
-        # print(frame_one_month)
+        frame_one_month = self.\
+            __calculate_data_for_period(df, one_month_back, today, "1 Month")
 
         start_of_year = datetime.datetime(date.today().year, 1, 1).date()
-        frame_ytd = self.__calculate_data_for_period(df, start_of_year, today, "YTD")
-        # print(frame_ytd)
+        frame_ytd = self.\
+            __calculate_data_for_period(df, start_of_year, today, "YTD")
 
-        one_year_back = datetime.datetime(today.year - 1, today.month, today.day).date()
-        frame_one_year = self.__calculate_data_for_period(df, one_year_back, today, "1 Year")
-        # print(frame_one_year)
+        one_year_back = datetime.\
+            datetime(today.year - 1, today.month, today.day).date()
+        frame_one_year = self.\
+            __calculate_data_for_period(df, one_year_back, today, "1 Year")
 
-        three_year_back = datetime.datetime(today.year - 3, today.month, today.day) \
+        three_year_back = datetime.\
+            datetime(today.year - 3, today.month, today.day) \
             .date()
-        frame_three_year = self.__calculate_data_for_period(df, three_year_back, today, "3 Years")
-        # print(frame_three_year)
+        frame_three_year = self.\
+            __calculate_data_for_period(df, three_year_back, today, "3 Years")
 
         return pd.concat([frame_one_day,
                           frame_one_month,
@@ -53,7 +69,10 @@ class Crawler:
                          axis=1).transpose()[self.tickers]
 
     def __sort_order_df(self, df: pd.DataFrame) -> pd.DataFrame:
-        df.loc["Index"] = self.tickerNames
+        """
+        Sort and arange the tickers
+        """
+        df.loc["Index"] = self.ticker_names
 
         modified_column_names = column_names.copy()
         modified_column_names.insert(0, "Index")
@@ -72,6 +91,9 @@ class Crawler:
                                     period_start_date: date,
                                     period_end_date: date,
                                     frame_label: str) -> pd.DataFrame:
+        """
+        Calculates the data for the period
+        """
         try:
             index_series = df.index.to_series()
             interval_filter = index_series \
@@ -87,6 +109,9 @@ class Crawler:
             print("Something bad happened while processing data!")
 
     def __get_quotes(self):
+        """
+        Fetch ticker data from yahoo finance
+        """
         return yf.download(
             self.tickers,
             period='3y',
