@@ -176,6 +176,51 @@ def global_etf():
             print("---------------")
 
 
+def find_by_ticker():
+    """
+    Checks the validity of input and fetches the data for the inputed ticker
+
+    This code is partly borrowed from
+    https://www.tutorialgateway.org/python-program-to-check-character-is-alphabet-or-digit/
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
+    while True:
+        try:
+            print_submenu()
+            choice = input("Please enter the stock symbol: ex: MSFT, AAPL\n")
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("Find instrument by ticker")
+
+            if check_is_digit(choice):
+                handle_nav_option(int(choice))
+            elif ticker_symbol_valid(choice):
+                if ('a' <= choice <= 'z') or ('A' <= choice <= 'Z'):
+                    ticker_input = choice
+                    ticker_df = fetch_ticker_info(ticker_input)
+                    if ticker_df is None:
+                        print("---------------")
+                        print(colored("Ticker info not found!", 'red'))
+                        print("---------------")
+                    else:
+                        
+                        print(tabulate(ticker_df, headers='keys',
+                              tablefmt='psql'))
+                else:
+                    print("---------------")
+                    print(colored("You need to input Alphabetic characters",
+                                  'red'))
+                    print("---------------")
+            else:
+                print("---------------")
+                print(colored("Unknown option", 'red'))
+                print("---------------")
+
+        except ValueError:
+            print("---------------")
+            print(colored("You didn't enter a number !", 'red'))
+            print("---------------")
+            continue
+
 
 def print_main_menu():
     """
@@ -202,6 +247,58 @@ def print_submenu():
     print("3. Global Sector ETF's")
     print("4. Find instrument by ticker")
     print("---------------")
+
+
+def parse_string_to_int(input_str):
+    """
+    Checks if the input is a digit
+    """
+    try:
+        value = int(input_str)
+    except ValueError:
+        value = None
+    return value
+
+
+def handle_nav_option(choice):
+    """
+    Handles the input navigation
+    """
+    if choice == 0:
+        main_menu()
+    elif choice == 1:
+        us_etf()
+    elif choice == 2:
+        us_small_etf()
+    elif choice == 3:
+        global_etf()
+    elif choice == 4:
+        find_by_ticker()
+    else:
+        print("---------------")
+        print(colored("Invalid choice!!!", 'red'))
+        print("---------------")
+
+
+def ticker_symbol_valid(ticker: str):
+    """
+    Checks the caracter lenght of the ticker
+    """
+    return 0 < len(ticker) <= 5
+
+
+def check_is_digit(input_str):
+    """
+    Verify if User entered a digit or not
+    """
+    return parse_string_to_int(input_str) is not None
+
+
+def main():
+    """
+    Run all program functions
+    """
+    main_menu()
 
 
 print("\n\nWelcome to Sector ETFs Performance App.\n")
