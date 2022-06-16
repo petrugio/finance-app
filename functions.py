@@ -63,7 +63,7 @@ def fetch_ticker_info(ticker: str):
 
 def loading_ticker(count=5):
     """
-    Creates animation to privide feedback to the user
+    Creates animation to provide feedback to the user
     that the program is still running
 
     This code is borrowed from

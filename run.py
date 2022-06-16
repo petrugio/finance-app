@@ -178,7 +178,7 @@ def global_etf():
 
 def find_by_ticker():
     """
-    Checks the validity of input and fetches the data for the inputed ticker
+    Checks the validity of input and fetches the data for the inputted ticker
 
     This code is partly borrowed from
     https://www.tutorialgateway.org/python-program-to-check-character-is-alphabet-or-digit/
@@ -224,7 +224,7 @@ def find_by_ticker():
 
 def print_main_menu():
     """
-    When called prints menu to terminal
+    When called, prints menu to terminal
     """
     print("-MAIN MENU-")
     print("---------------")
@@ -237,7 +237,7 @@ def print_main_menu():
 
 def print_submenu():
     """
-    When called prints submenu to terminal
+    When called, prints submenu to terminal
     """
     print("Navigation")
     print("---------------")
@@ -282,7 +282,7 @@ def handle_nav_option(choice):
 
 def ticker_symbol_valid(ticker: str):
     """
-    Checks the caracter lenght of the ticker
+    Checks the character length of the ticker
     """
     return 0 < len(ticker) <= 5
 

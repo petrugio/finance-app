@@ -14,7 +14,7 @@ from functions import format_percent
 
 class Crawler:
     """
-    Contains a set of functios to fetch, process, sort and display data
+    Contains a set of functions to fetch, process, sort and display data
     """
     def __init__(self, tickers, ticker_names):
         """
@@ -70,7 +70,7 @@ class Crawler:
 
     def __sort_order_df(self, df: pd.DataFrame) -> pd.DataFrame:
         """
-        Sort and arange the tickers
+        Sort and arrange the tickers
         """
         df.loc["Index"] = self.ticker_names
 
