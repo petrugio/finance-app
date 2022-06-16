@@ -202,7 +202,7 @@ def find_by_ticker():
                         print(colored("Ticker info not found!", 'red'))
                         print("---------------")
                     else:
-                        
+                        loading_ticker()
                         print(tabulate(ticker_df, headers='keys',
                               tablefmt='psql'))
                 else:

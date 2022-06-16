@@ -59,3 +59,25 @@ def fetch_ticker_info(ticker: str):
 
     all_results["Info"] = single_result
     return pd.DataFrame.from_dict(all_results)
+
+
+def loading_ticker(count=5):
+    """
+    Creates animation to privide feedback to the user
+    that the program is still running
+
+    This code is borrowed from
+    https://stackoverflow.com/questions/22029562/
+    python-how-to-make-simple-animated-loading-while-process-is-running
+    """
+    for i in range(count):
+        sys.stdout.write('\rSearching  | ')
+        time.sleep(0.1)
+        sys.stdout.write('\rSearching  /')
+        time.sleep(0.1)
+        sys.stdout.write('\rSearching  -')
+        time.sleep(0.1)
+        sys.stdout.write('\rSearching  \\')
+        time.sleep(0.1)
+    sys.stdout.write(colored("\rWoo-Hoo!!! Found it", "green") + "\n\n")
+    print("---------------")
