@@ -1,31 +1,43 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<h1 align="center">ETF Finance App</h1>
 
-Welcome petrugio,
+<a href="https://etf-finance-app.herokuapp.com/" target="_blank" rel="noopener" alt="ETF Finance App, click here to open the website"><img src="documentation/features/etf_finance_app.gif" alt="ETF Finance App" max-height="650px" max-width="1300px"></a>
+<hr>
+View the repository in GitHub
+<a href="https://github.com/petrugio/finance-app" target="_blank" rel="noopener">here</a>
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+View the live project
+<a href="https://etf-finance-app.herokuapp.com/" target="_blank" rel="noopener">here</a>
 
-## Reminders
+![Landing page](documentation/features/welcome.jpg)
+![Landing page](documentation/features/main.jpg)
+![Landing page](documentation/features/main_error.jpg)
+![Landing page](documentation/features/us.jpg)
+![Landing page](documentation/features/small.jpg)
+![Landing page](documentation/features/global.jpg)
+![Landing page](documentation/features/find.jpg)
+![Landing page](documentation/features/found.jpg)
+![Landing page](documentation/features/searching.jpg)
+![Landing page](documentation/features/number_error.jpg)
+![Landing page](documentation/features/ticker_error.jpg)
+![Landing page](documentation/features/letter_error.jpg)
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+TEST
 
-## Creating the Heroku app
+![Landing page](documentation/testing/pep8_run.jpg)
+![Landing page](documentation/testing/pep8_constants.jpg)
+![Landing page](documentation/testing/pep8_pep8_crawler.jpg)
+![Landing page](documentation/testing/pep8_functions.jpg)
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
 
-1. `heroku/python`
-2. `heroku/nodejs`
+ERRORS
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+![Landing page](documentation/errors/fetch_error.jpg)
+![Landing page](documentation/errors/index_error.jpg)
+![Landing page](documentation/errors/index_error_fix.jpg)
+![Landing page](documentation/errors/transpose_error.jpg)
+![Landing page](documentation/errors/transpose_error_code.jpg)
+![Landing page](documentation/errors/transpose_error_fix.jpg)
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
 
-Connect your GitHub repository and deploy as normal.
 
-## Constraints
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
