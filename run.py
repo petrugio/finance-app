@@ -193,7 +193,8 @@ def find_by_ticker():
     while True:
         try:
             print_submenu()
-            choice = input(colored("Please enter the stock symbol: ex: MSFT, AAPL\n", 'green'))
+            choice = input(colored("Please enter the stock symbol: ex: "
+                                   "MSFT, AAPL\n", 'green'))
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Find instrument by ticker")
 
@@ -313,9 +314,9 @@ os.system('cls' if os.name == 'nt' else 'clear')
 print("\n\nWelcome to\n")
 tprint("finance***app", font="Double-struck", chr_ignore=True)
 print("---------------")
-print("\n\nWith this Sector ETFs Performance App, you can view the performance\n")
-print("\n\nof some major US and World Exchange-Traded Funds (ETF's)\n")
-print("\n\nand also you can find basic info about a particular\n")
+print("\n\nWith this Sector ETFs Performance App, you can view the\n")
+print("\n\nperformance of some major US and World Exchange-Traded Funds\n")
+print("\n\n(ETF's) and also you can find basic info about a particular\n")
 print("\n\nfinancial instrument that can be found on Yahoo Finance\n")
 print("---------------")
 print("\n\nCreated by Petru Chelban\n")
