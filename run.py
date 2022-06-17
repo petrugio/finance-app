@@ -2,6 +2,8 @@
 # import os to help clear terminal
 import os
 # import termcolor for adding color
+# import art for adding custom text
+from art import *
 from termcolor import colored
 # import tabulate to display data in a table
 from tabulate import tabulate
@@ -22,7 +24,8 @@ def main_menu():
     print_main_menu()
     while True:
         try:
-            choice = int(input("Enter Choice: [1,2,3,4]\n"))
+            choice = int(input(colored("Enter Choice: [1,2,3,4]\n",
+                                       'green')))
         except ValueError:
             print("---------------")
             print(colored("You didn't enter a number !", 'red'))
@@ -62,7 +65,8 @@ def us_etf():
 
     while True:
         try:
-            choice = int(input("Enter Choice: [0,1,2,3,4]\n"))
+            choice = int(input(colored("Enter Choice: [0,1,2,3,4]\n",
+                                       'green')))
         except ValueError:
             print("---------------")
             print(colored("You didn't enter a number !", 'red'))
@@ -106,7 +110,8 @@ def us_small_etf():
 
     while True:
         try:
-            choice = int(input("Enter Choice: [0,1,2,3,4]\n"))
+            choice = int(input(colored("Enter Choice: [0,1,2,3,4]\n",
+                                       'green')))
         except ValueError:
             print("---------------")
             print(colored("You didn't enter a number !", 'red'))
@@ -148,7 +153,8 @@ def global_etf():
 
     while True:
         try:
-            choice = int(input("Enter Choice: [0,1,2,3,4]\n"))
+            choice = int(input(colored("Enter Choice: [0,1,2,3,4]\n",
+                                       'green')))
         except ValueError:
             print("---------------")
             print(colored("You didn't enter a number !", 'red'))
@@ -187,7 +193,7 @@ def find_by_ticker():
     while True:
         try:
             print_submenu()
-            choice = input("Please enter the stock symbol: ex: MSFT, AAPL\n")
+            choice = input(colored("Please enter the stock symbol: ex: MSFT, AAPL\n", 'green'))
             os.system('cls' if os.name == 'nt' else 'clear')
             print("Find instrument by ticker")
 
@@ -298,15 +304,16 @@ def main():
     """
     Displays welcome screen
     """
-    input("Press enter to continue")
+    input(colored("*** Press enter to continue ***", 'green'))
 
     main_menu()
 
 
 os.system('cls' if os.name == 'nt' else 'clear')
-print("\n\nWelcome to Sector ETFs Performance App.\n")
+print("\n\nWelcome to\n")
+tprint("finance***app", font="Double-struck", chr_ignore=True)
 print("---------------")
-print("\n\nWith this App, you can view the performance\n")
+print("\n\nWith this Sector ETFs Performance App, you can view the performance\n")
 print("\n\nof some major US and World Exchange-Traded Funds (ETF's)\n")
 print("\n\nand also you can find basic info about a particular\n")
 print("\n\nfinancial instrument that can be found on Yahoo Finance\n")
