@@ -296,10 +296,23 @@ def check_is_digit(input_str):
 
 def main():
     """
-    Run all program functions
+    Displays welcome screen
     """
+    input("Press enter to continue")
+
     main_menu()
 
 
+os.system('cls' if os.name == 'nt' else 'clear')
 print("\n\nWelcome to Sector ETFs Performance App.\n")
+print("---------------")
+print("\n\nWith this App, you can view the performance\n")
+print("\n\nof some major US and World Exchange-Traded Funds (ETF's)\n")
+print("\n\nand also you can find basic info about a particular\n")
+print("\n\nfinancial instrument that can be found on Yahoo Finance\n")
+print("---------------")
+print("\n\nCreated by Petru Chelban\n")
+print("\n\ngithub.com/petrugio\n")
+print("---------------")
+
 main()
