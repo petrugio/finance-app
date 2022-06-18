@@ -192,11 +192,13 @@ def find_by_ticker():
     os.system('cls' if os.name == 'nt' else 'clear')
     while True:
         try:
+            print("Find instrument by ticker")
+            print("---------------")
             print_submenu()
             choice = input(colored("Please enter the stock symbol: ex: "
                                    "MSFT, AAPL\n", 'green'))
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("Find instrument by ticker")
+
 
             if check_is_digit(choice):
                 handle_nav_option(int(choice))
@@ -324,3 +326,4 @@ print("\n\ngithub.com/petrugio\n")
 print("---------------")
 
 main()
+
