@@ -208,7 +208,7 @@ def find_by_ticker():
                     ticker_df = fetch_ticker_info(ticker_input)
                     if ticker_df is None:
                         print("---------------")
-                        print(colored("Ticker info not found!", 'red'))
+                        print(colored("Ticker info not found !!!", 'red'))
                         print("---------------")
                     else:
                         loading_ticker()
@@ -216,17 +216,17 @@ def find_by_ticker():
                               tablefmt='psql'))
                 else:
                     print("---------------")
-                    print(colored("You need to input Alphabetic characters",
+                    print(colored("You need to input Alphabetic characters !!!",
                                   'red'))
                     print("---------------")
             else:
                 print("---------------")
-                print(colored("Unknown option", 'red'))
+                print(colored("Ticker should be up to 5 letters !!!, 'red'))
                 print("---------------")
 
         except ValueError:
             print("---------------")
-            print(colored("You didn't enter a number !", 'red'))
+            print(colored("You didn't enter a number !!!", 'red'))
             print("---------------")
             continue
 
@@ -285,7 +285,7 @@ def handle_nav_option(choice):
         find_by_ticker()
     else:
         print("---------------")
-        print(colored("Invalid choice!!!", 'red'))
+        print(colored("Invalid choice !!!", 'red'))
         print("---------------")
 
 
@@ -326,4 +326,5 @@ print("\n\ngithub.com/petrugio\n")
 print("---------------")
 
 main()
+
 
