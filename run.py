@@ -199,7 +199,6 @@ def find_by_ticker():
                                    "MSFT, AAPL\n", 'green'))
             os.system('cls' if os.name == 'nt' else 'clear')
 
-
             if check_is_digit(choice):
                 handle_nav_option(int(choice))
             elif ticker_symbol_valid(choice):
@@ -216,12 +215,12 @@ def find_by_ticker():
                               tablefmt='psql'))
                 else:
                     print("---------------")
-                    print(colored("You need to input Alphabetic characters !!!",
+                    print(colored("You need to input Alphanumeric characters !!!",
                                   'red'))
                     print("---------------")
             else:
                 print("---------------")
-                print(colored("Ticker should be up to 5 letters !!!, 'red'))
+                print(colored("Ticker should be up to 5 letters !!!", 'red'))
                 print("---------------")
 
         except ValueError:
@@ -307,7 +306,8 @@ def main():
     """
     Displays welcome screen
     """
-    input(colored("*** Press enter to continue ***", 'green'))
+    print(colored("*** Press enter to continue ***", 'green'))
+    input()
 
     main_menu()
 
@@ -326,5 +326,3 @@ print("\n\ngithub.com/petrugio\n")
 print("---------------")
 
 main()
-
-
