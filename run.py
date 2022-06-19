@@ -215,7 +215,8 @@ def find_by_ticker():
                               tablefmt='psql'))
                 else:
                     print("---------------")
-                    print(colored("You need to input Alphanumeric characters !!!",
+                    print(colored("You need to input "
+                                  "Alphanumeric characters !!!",
                                   'red'))
                     print("---------------")
             else:
@@ -225,12 +226,14 @@ def find_by_ticker():
 
         except ValueError:
             """
-            We cannot foresee all possible symbols the end-user can input. 
-            Hence, for this reason we're having a catch-all clause that will display a user-friendly message. 
-            So, with this we're trying provide a pleasant UX. 
+            We cannot foresee all possible symbols the end-user can input.
+            Hence, for this reason we're having a catch-all clause that
+            will display a user-friendly message.
+            So, with this we're trying provide a pleasant UX.
             """
             print("---------------")
-            print(colored("An unknown error happened. Please restart the program.", 'red'))
+            print(colored("An unknown error happened. "
+                          "Please restart the program.", 'red'))
             print("---------------")
             continue
 
