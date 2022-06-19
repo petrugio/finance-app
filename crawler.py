@@ -36,10 +36,10 @@ class Crawler:
         today = date.today()
         df = pd.DataFrame(self.__get_quotes())
 
-        one_day_back = datetime \
-            .datetime(today.year, today.month, today.day - 1).date()
-        frame_one_day = self.\
-            __calculate_data_for_period(df, one_day_back, today, "Today")
+        frame_one_day = df.pct_change(periods=1) \
+            .apply(normalize_percent).tail(1).iloc[0] \
+            .apply(format_percent).astype(str) \
+            .to_frame(name="Today")
 
         one_month_back = datetime \
             .datetime(today.year, today.month - 1, today.day).date()
