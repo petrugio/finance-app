@@ -74,9 +74,16 @@ This app takes the users' stories mentioned above into consideration to create a
 
 *  When the user selects options 1 to 3 he/she is presented with corresponding screen with performance information displayed.
 
-* The information is presented in a table format with clear and descriptive columns and rows for different periods.
+*  The steps to display the information are as follow:
+   
+   - Corresponding `etf()` function gets called
+   - This function assigns to the class `Crawler` the corresponding lists on ETF tickers and tickers names list from the file `constants`
+   - Class Crawler takes the list, fetches the data from Yahoo Finance, does the percent change calculations and returns the processed data back to the  `etf()` function
+   - The data is printed in a table format
 
-* The performance is presented in percent(%) terms and color coded with intuitively red and green colors witch are commonly associated with positive and negative values in the financial markets.
+* The information is presented with clear and descriptive columns and rows for different periods.
+
+* The performance is presented in percent(%) terms and color coded with intuitively red and green colors which are commonly associated with positive and negative values in the financial markets.
 
 * A navigation menu is presented below the table and has an extra option to give the user the ability to return to the main screen.
 
@@ -271,7 +278,7 @@ A mix of red and green was used to keep the app intuitive give feedback to the U
 
 During development, incorrectly specifying the date resulted in getting False values in the dataframe.
 
-![Landing page](documentation/errors/fetch_error.jpg)
+![Fetch error](documentation/errors/fetch_error.jpg)
 
 It was solved by looking at [examples](https://towardsdatascience.com/financial-data-from-yahoo-finance-with-python-b5399743bcc6) on how to query `yfinance` to get the data for specific time period.
 
@@ -282,11 +289,11 @@ It was solved by looking at [examples](https://towardsdatascience.com/financial-
 
 During code refactoring a duplication/addition of table indexes occurred when navigating between pages:
 
-![Landing page](documentation/errors/index_error.jpg)
+![Index error](documentation/errors/index_error.jpg)
 
 It was fixed by adding `.copy()` at the end of the line. 
 
-![Landing page](documentation/errors/index_error_fix.jpg)
+![Index error](documentation/errors/index_error_fix.jpg)
 
 
 
@@ -295,8 +302,8 @@ It was fixed by adding `.copy()` at the end of the line.
 *  During development while trying to add the 2nd and 3rd list of ETFs run into a key error:  
 
 
-![Landing page](documentation/errors/transpose_error.jpg)
-![Landing page](documentation/errors/transpose_error_code.jpg)
+![Transpose error](documentation/errors/transpose_error.jpg)
+![Transpose error](documentation/errors/transpose_error_code.jpg)
 
 was fixed by building a separate function for it:
 
@@ -309,7 +316,7 @@ was fixed by building a separate function for it:
             self.ticker_names = ticker_names
 
 
-![Landing page](documentation/errors/transpose_error_fix.jpg)
+![Transpose error](documentation/errors/transpose_error_fix.jpg)
 
 **4. Period error**
 
@@ -318,22 +325,22 @@ Good that error handling message pinpointed where is the problem: `Something bad
 Financial markets are closed during weekend, hence there is no data. While refactoring `today = date.today()` was used to calculate previous period. It works for all periods except for the previous day. Therefore the code to calculate previous day was reverted to the version before refactor in order to work properly.  
 In the the future code may be refactored to handle this exception but for time being it is working as intended.
 
-![Landing page](documentation/errors/period_error.jpg)
-![Landing page](documentation/errors/period_error_code.jpg)
+![Period error](documentation/errors/period_error.jpg)
+![Period error](documentation/errors/period_error_code.jpg)
 
 And this is the fix:
 
-![Landing page](documentation/errors/period_error_fix.jpg)
+![Period error](documentation/errors/period_error_fix.jpg)
 
 
 ### Validator Testing
 
 [pep8 online](http://pep8online.com/) was used for validating the python files.  All python files were checked with no errors reported.
 
-![Landing page](documentation/testing/pep8_run.jpg)
-![Landing page](documentation/testing/pep8_constants.jpg)
-![Landing page](documentation/testing/pep8_pep8_crawler.jpg)
-![Landing page](documentation/testing/pep8_functions.jpg)
+![pep8 online](documentation/testing/pep8_run.jpg)
+![pep8 online](documentation/testing/pep8_constants.jpg)
+![pep8 online](documentation/testing/pep8_crawler.jpg)
+![pep8 online](documentation/testing/pep8_functions.jpg)
 
 
 
