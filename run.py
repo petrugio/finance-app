@@ -224,8 +224,13 @@ def find_by_ticker():
                 print("---------------")
 
         except ValueError:
+            """
+            We cannot foresee all possible symbols the end-user can input. 
+            Hence, for this reason we're having a catch-all clause that will display a user-friendly message. 
+            So, with this we're trying provide a pleasant UX. 
+            """
             print("---------------")
-            print(colored("You didn't enter a number !!!", 'red'))
+            print(colored("An unknown error happened. Please restart the program.", 'red'))
             print("---------------")
             continue
 
